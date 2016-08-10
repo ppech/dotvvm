@@ -1,4 +1,5 @@
-﻿using DotVVM.Framework.Runtime.Filters;
+﻿using DotVVM.Framework.Runtime.Filters.PresenterFilters;
+using DotVVM.Framework.Runtime.Filters.PresenterFilters.ActionFilters;
 using DotVVM.Framework.ViewModel;
 
 namespace DotVVM.Samples.BasicSamples.ViewModels.ComplexSamples.SPARedirect

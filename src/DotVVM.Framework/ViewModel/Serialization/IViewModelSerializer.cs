@@ -1,6 +1,6 @@
 using DotVVM.Framework.Controls.Infrastructure;
 using DotVVM.Framework.Hosting;
-using DotVVM.Framework.Runtime.Filters;
+using DotVVM.Framework.Runtime.Filters.PresenterFilters.ActionFilters;
 
 namespace DotVVM.Framework.ViewModel.Serialization
 {

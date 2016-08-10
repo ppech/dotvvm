@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using DotVVM.Framework.Runtime.Filters.PresenterFilters;
 using DotVVM.Framework.ViewModel;
-using DotVVM.Framework.Runtime.Filters;
+using DotVVM.Framework.Runtime.Filters.PresenterFilters.ActionFilters;
 
 namespace DotVVM.Samples.BasicSamples.ViewModels.ComplexSamples.Auth
 {

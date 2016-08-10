@@ -11,7 +11,7 @@ using DotVVM.Framework.Controls;
 using DotVVM.Framework.Controls.Infrastructure;
 using DotVVM.Framework.ViewModel;
 using DotVVM.Framework.Runtime;
-using DotVVM.Framework.Runtime.Filters;
+using DotVVM.Framework.Runtime.Filters.PresenterFilters.ActionFilters;
 using DotVVM.Framework.Security;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
@@ -112,7 +112,7 @@ namespace DotVVM.Framework.Hosting
             context.ViewModel = ViewModelLoader.InitializeViewModel(context, page);
 
             // get action filters
-            var globalFilters = context.Configuration.Runtime.GlobalFilters.ToList();
+            var globalFilters = context.Configuration.Runtime.GlobalActionFilters.ToList();
             var viewModelFilters = context.ViewModel.GetType().GetCustomAttributes<ActionFilterAttribute>(true).ToList();
 
             try
@@ -293,7 +293,7 @@ namespace DotVVM.Framework.Hosting
                 IsControlCommand = false,
                 Action = () => methodInfo.Invoke(target, methodArguments)
             };
-            var filters = context.Configuration.Runtime.GlobalFilters
+            var filters = context.Configuration.Runtime.GlobalActionFilters
                 .Concat(methodInfo.DeclaringType.GetCustomAttributes<ActionFilterAttribute>())
                 .Concat(methodInfo.GetCustomAttributes<ActionFilterAttribute>())
                 .ToArray();

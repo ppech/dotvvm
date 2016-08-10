@@ -485,13 +485,14 @@
     <Compile Include="Runtime\ControlTreeWalker.cs" />
     <Compile Include="Runtime\DefaultOutputRenderer.cs" />
     <Compile Include="Runtime\DefaultDotvvmViewBuilder.cs" />
-    <Compile Include="Runtime\Filters\ActionFilterAttribute.cs" />
-    <Compile Include="Runtime\Filters\ActionInfo.cs" />
-    <Compile Include="Runtime\Filters\ActionParameterInfo.cs" />
-    <Compile Include="Runtime\Filters\AuthorizeAttribute.cs" />
-    <Compile Include="Runtime\Filters\ExceptionFilterAttribute.cs" />
-    <Compile Include="Runtime\Filters\ModelValidationFilterAttribute.cs" />
-    <Compile Include="Runtime\Filters\NotAuthorizedAttribute.cs" />
+    <Compile Include="Runtime\Filters\PresenterFilters\ActionFilters\ActionFilterAttribute.cs" />
+    <Compile Include="Runtime\Filters\PresenterFilters\ActionFilters\ActionInfo.cs" />
+    <Compile Include="Runtime\Filters\PresenterFilters\ActionFilters\ActionParameterInfo.cs" />
+    <Compile Include="Runtime\Filters\PresenterFilters\AuthorizeAttribute.cs" />
+    <Compile Include="Runtime\Filters\PresenterFilters\ActionFilters\ExceptionFilterAttribute.cs" />
+    <Compile Include="Runtime\Filters\PresenterFilters\ActionFilters\ModelValidationFilterAttribute.cs" />
+    <Compile Include="Runtime\Filters\PresenterFilters\ActionFilters\NotAuthorizedAttribute.cs" />
+    <Compile Include="Runtime\Filters\PresenterFilters\PresenterFilterAttribute.cs" />
     <Compile Include="Runtime\IOutputRenderer.cs" />
     <Compile Include="Runtime\IDotvvmViewBuilder.cs" />
     <Compile Include="Security\DefaultCsrfProtector.cs" />
@@ -640,6 +641,7 @@
       <Name>DotVVM.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <TypeScriptTarget>ES5</TypeScriptTarget>

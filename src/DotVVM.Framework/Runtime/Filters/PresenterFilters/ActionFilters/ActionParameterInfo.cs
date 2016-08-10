@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace DotVVM.Framework.Runtime.Filters
+namespace DotVVM.Framework.Runtime.Filters.PresenterFilters.ActionFilters
 {
     public class ActionParameterInfo
     {

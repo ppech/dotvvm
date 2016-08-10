@@ -5,7 +5,7 @@ using DotVVM.Framework.Hosting;
 using DotVVM.Framework.ViewModel;
 using DotVVM.Framework.ViewModel.Validation;
 
-namespace DotVVM.Framework.Runtime.Filters
+namespace DotVVM.Framework.Runtime.Filters.PresenterFilters.ActionFilters
 {
 
     /// <summary>

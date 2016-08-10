@@ -6,7 +6,7 @@ using DotVVM.Framework.Controls;
 using DotVVM.Framework.Binding;
 using DotVVM.Framework.Binding.Expressions;
 
-namespace DotVVM.Framework.Runtime.Filters
+namespace DotVVM.Framework.Runtime.Filters.PresenterFilters.ActionFilters
 {
     public class ActionInfo
     {

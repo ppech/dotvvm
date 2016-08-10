@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DotVVM.Framework.Runtime.Filters
+namespace DotVVM.Framework.Runtime.Filters.PresenterFilters.ActionFilters
 {
     public class NotAuthorizedAttribute: Attribute
     {

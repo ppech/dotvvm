@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DotVVM.Framework.Hosting;
-using DotVVM.Framework.Runtime.Filters;
+using DotVVM.Framework.Runtime.Filters.PresenterFilters.ActionFilters;
 using DotVVM.Framework.ViewModel;
 
 namespace DotVVM.Samples.BasicSamples.ViewModels.FeatureSamples.ActionFilterErrorHandling

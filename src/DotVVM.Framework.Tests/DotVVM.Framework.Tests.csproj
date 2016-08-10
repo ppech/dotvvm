@@ -216,6 +216,11 @@
     <Compile Include="Runtime\ControlTree\ValueConversionTests.cs" />
     <Compile Include="Runtime\DefaultViewModelSerializerTests.cs" />
     <Compile Include="Runtime\DotvvmControlCollectionTests.cs" />
+    <Compile Include="Runtime\Filters\TestedAfterExceptionFilter.cs" />
+    <Compile Include="Runtime\Filters\TestedExceptionFilter.cs" />
+    <Compile Include="Runtime\Filters\FilterException.cs" />
+    <Compile Include="Runtime\Filters\PresenterFilterTest.cs" />
+    <Compile Include="Runtime\Filters\TestedPresenter.cs" />
     <Compile Include="Runtime\ResourceManagerTests.cs" />
     <Compile Include="Routing\DotvvmRouteTests.cs" />
     <Compile Include="Runtime\DefaultViewCompilerTests.cs" />

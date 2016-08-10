@@ -10,7 +10,7 @@ using DotVVM.Framework.Compilation.ControlTree;
 using DotVVM.Framework.Compilation.ControlTree.Resolved;
 using DotVVM.Framework.Compilation.Javascript;
 using DotVVM.Framework.Controls;
-using DotVVM.Framework.Runtime.Filters;
+using DotVVM.Framework.Runtime.Filters.PresenterFilters.ActionFilters;
 using DotVVM.Framework.Utils;
 
 namespace DotVVM.Framework.Compilation

@@ -15,7 +15,7 @@ using DotVVM.Framework.Hosting;
 using DotVVM.Framework.Routing;
 using DotVVM.Framework.ResourceManagement;
 using DotVVM.Framework.Runtime;
-using DotVVM.Framework.Runtime.Filters;
+using DotVVM.Framework.Runtime.Filters.PresenterFilters.ActionFilters;
 using DotVVM.Framework.Security;
 using DotVVM.Framework.ResourceManagement.ClientGlobalize;
 using DotVVM.Framework.ViewModel;
@@ -123,7 +123,7 @@ namespace DotVVM.Framework.Configuration
 
             InitDefaultServices(configuration);
 
-            configuration.Runtime.GlobalFilters.Add(new ModelValidationFilterAttribute());
+            configuration.Runtime.GlobalActionFilters.Add(new ModelValidationFilterAttribute());
             configuration.Markup.Controls.AddRange(new[]
             {
                 new DotvvmControlConfiguration() { TagPrefix = "dot", Namespace = "DotVVM.Framework.Controls", Assembly = "DotVVM.Framework" }

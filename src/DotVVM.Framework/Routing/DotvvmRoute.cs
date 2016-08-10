@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using DotVVM.Framework.Hosting;
 using System.Text.RegularExpressions;
+using DotVVM.Framework.Runtime.Filters.PresenterFilters;
+using DotVVM.Framework.Runtime.Filters.PresenterFilters.ActionFilters;
 
 namespace DotVVM.Framework.Routing
 {
@@ -240,7 +243,20 @@ namespace DotVVM.Framework.Routing
         public override Task ProcessRequest(DotvvmRequestContext context)
         {
             context.Presenter = presenterFactory();
-            return context.Presenter.ProcessRequest(context);
+            var presenterFilters = context.Presenter.GetType().GetCustomAttributes<PresenterFilterAttribute>(true).ToList();
+            foreach (var filter in context.Configuration.Runtime.GlobalPresenterFilters.Concat(presenterFilters).ToArray())
+            {
+                filter.BeforeProcessing(context);
+            }
+
+            var task =  context.Presenter.ProcessRequest(context);
+
+            foreach (var filter in context.Configuration.Runtime.GlobalPresenterFilters.Concat(presenterFilters).ToArray())
+            {
+                filter.AfterProcessing(context);
+            }
+
+            return task;
         }
     }
 }

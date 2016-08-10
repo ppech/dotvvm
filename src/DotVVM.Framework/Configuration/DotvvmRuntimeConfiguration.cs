@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
+using DotVVM.Framework.Runtime.Filters.PresenterFilters;
 using Newtonsoft.Json;
-using DotVVM.Framework.Runtime.Filters;
+using DotVVM.Framework.Runtime.Filters.PresenterFilters.ActionFilters;
 
 namespace DotVVM.Framework.Configuration
 {
@@ -13,7 +12,8 @@ namespace DotVVM.Framework.Configuration
         /// Gets filters that are applied for all requests.
         /// </summary>
         [JsonIgnore()]
-        public List<ActionFilterAttribute> GlobalFilters { get; private set; }
+        public List<ActionFilterAttribute> GlobalActionFilters { get; private set; }
+        public List<PresenterFilterAttribute> GlobalPresenterFilters { get; private set; }
 
 
         /// <summary>
@@ -21,7 +21,8 @@ namespace DotVVM.Framework.Configuration
         /// </summary>
         public DotvvmRuntimeConfiguration()
         {
-            GlobalFilters = new List<ActionFilterAttribute>();
+            GlobalActionFilters = new List<ActionFilterAttribute>();
+            GlobalPresenterFilters = new List<PresenterFilterAttribute>();
         }
     }
 }

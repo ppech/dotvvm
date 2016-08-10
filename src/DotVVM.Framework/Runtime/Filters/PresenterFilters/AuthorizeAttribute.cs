@@ -4,13 +4,14 @@ using System.Linq;
 using System.Net;
 using DotVVM.Framework.Hosting;
 using System.Collections.Concurrent;
+using DotVVM.Framework.Runtime.Filters.PresenterFilters.ActionFilters;
 
-namespace DotVVM.Framework.Runtime.Filters
+namespace DotVVM.Framework.Runtime.Filters.PresenterFilters
 {
     /// <summary>
     /// A filter that checks the authorize attributes and redirects to the login page.
     /// </summary>
-    public class AuthorizeAttribute : ActionFilterAttribute
+    public class AuthorizeAttribute : PresenterFilterAttribute
     {
 
         /// <summary>
@@ -25,28 +26,10 @@ namespace DotVVM.Framework.Runtime.Filters
         {
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AuthorizeAttribute"/> class.
-        /// </summary>
-        /// <param name="roles">The comma-separated list of roles. The user must be at least in one of them.</param>
-        public AuthorizeAttribute(string roles)
-        {
-            Roles = roles.Split(',').Select(s => s.Trim()).Where(s => s.Length > 0).ToArray();
-        }
-
-        /// <summary>
-        /// Called before the command is invoked.
-        /// </summary>
-        protected internal override void OnCommandExecuting(IDotvvmRequestContext context, ActionInfo actionInfo)
+        protected internal override void BeforeProcessing(IDotvvmRequestContext context)
         {
             Authorize(context);
-            base.OnCommandExecuting(context, actionInfo);
-        }
-
-        protected internal override void OnViewModelCreated(IDotvvmRequestContext context)
-        {
-            Authorize(context);
-            base.OnViewModelCreated(context);
+            base.BeforeProcessing(context);
         }
 
         public void Authorize(IDotvvmRequestContext context)

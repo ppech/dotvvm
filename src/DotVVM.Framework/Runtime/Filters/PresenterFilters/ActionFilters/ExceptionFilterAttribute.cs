@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DotVVM.Framework.Hosting;
 
-namespace DotVVM.Framework.Runtime.Filters
+namespace DotVVM.Framework.Runtime.Filters.PresenterFilters.ActionFilters
 {
     /// <summary>
     /// Allows to modify the response when an exception occurs.
