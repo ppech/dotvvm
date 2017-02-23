@@ -1,8 +1,6 @@
 using DotVVM.Framework.Binding;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using DotVVM.Framework.Binding.Expressions;
 using DotVVM.Framework.Compilation.Javascript;
 
@@ -72,9 +70,9 @@ namespace DotVVM.Framework.Controls
             {
                 return (IEnumerable)dataSource;
             }
-            if (dataSource is IGridViewDataSet)
+            if (dataSource is IDotVVMDataSet)
             {
-                return ((IGridViewDataSet)dataSource).Items;
+                return ((IDotVVMDataSet)dataSource).Items;
             }
             throw new NotSupportedException($"The object of type '{dataSource.GetType()}' is not supported in the DataSource property!");
         }

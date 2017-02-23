@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace DotVVM.Framework.Controls
 {
-    public interface IGridViewDataSet
+    public interface IGridViewDataSet : IDotVVMDataSet
     {
         bool IsFirstPage { get; }
         bool IsLastPage { get; }
-        IList Items { get; }
-        int PageIndex { get; set; }
+        //IList Items { get; }
+        int PageNumber { get; set; }
         int PagesCount { get; }
         int PageSize { get; set; }
         string PrimaryKeyPropertyName { get; set; }
@@ -17,7 +17,7 @@ namespace DotVVM.Framework.Controls
         bool SortDescending { get; set; }
         string SortExpression { get; set; }
         int TotalItemsCount { get; set; }
-        IList<int> NearPageIndexes { get; }
+        IList<int> NearPageNumbers { get; }
         void GoToFirstPage();
         void GoToLastPage();
         void GoToNextPage();

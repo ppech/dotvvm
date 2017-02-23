@@ -27,7 +27,7 @@ namespace DotVVM.Samples.BasicSamples.ViewModels.ControlSamples.DataPager
             Data.Items.Clear();
             for (var i = 0; i < Data.PageSize; i++)
             {
-                var number = Data.PageSize * Data.PageIndex + i;
+                var number = Data.PageSize * (Data.PageNumber - 1) + i;
                 if (number < Data.TotalItemsCount)
                 {
                     Data.Items.Add(new Data() { Text = "Item " + number });
