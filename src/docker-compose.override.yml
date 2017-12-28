@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  dotvvm.samples.basicsamples.api.aspnetcore:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "5001"
+
+  dotvvm.samples.basicsamples.aspnetcore:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80"
+

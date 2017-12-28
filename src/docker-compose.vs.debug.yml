@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+  dotvvm.samples.basicsamples.aspnetcore:
+    volumes:
+      - .\DotVVM.Samples.Common\Views:/DotVVM.Samples.Common/Views:ro
+
