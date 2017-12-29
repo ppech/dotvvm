@@ -16,5 +16,10 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 80
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Development
+        - name: SAMPLES_ASPNETCORE_API_URL
+          value: http://52.232.111.123:8081
       imagePullSecrets:
       - name: azurecontainerreg
