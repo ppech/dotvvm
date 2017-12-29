@@ -11,7 +11,7 @@ spec:
         app: dotvvm-ci-api
     spec:
       containers:
-      - name: dotvvm.samples.basicsamples.api.aspnetcore
+      - name: dotvvm-ci-api
         image: dotvvmci.azurecr.io/dotvvm.samples.basicsamples.api.aspnetcore:latest
         imagePullPolicy: Always        
         ports:
