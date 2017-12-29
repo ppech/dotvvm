@@ -1,0 +1,20 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: dotvvm-ci-samples
+spec:
+  replicas: 1
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        app: dotvvm-ci-samples
+    spec:
+      containers:
+      - name: dotvvm.samples.basicsamples.aspnetcore
+        image: dotvvmci.azurecr.io/dotvvm.samples.basicsamples.aspnetcore:latest
+        imagePullPolicy: Always
+        imagePullSecrets:
+        - name: azurecontainerreg
+        ports:
+        - containerPort: 80

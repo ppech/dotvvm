@@ -2,13 +2,13 @@ version: '3'
 
 services:
   dotvvm.samples.basicsamples.api.aspnetcore:
-    image: dotvvm.samples.basicsamples.api.aspnetcore
+    image: "dotvvm.samples.basicsamples.api.aspnetcore:${TAG}"
     build:
       context: .
       dockerfile: DotVVM.Samples.BasicSamples.Api.AspNetCore/Dockerfile
 
   dotvvm.samples.basicsamples.aspnetcore:
-    image: dotvvm.samples.basicsamples.aspnetcore
+    image: "dotvvm.samples.basicsamples.aspnetcore:${TAG}"
     build:
       context: .
       dockerfile: DotVVM.Samples.BasicSamples.AspNetCore/Dockerfile
