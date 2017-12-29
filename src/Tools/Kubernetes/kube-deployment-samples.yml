@@ -14,7 +14,7 @@ spec:
       - name: dotvvm.samples.basicsamples.aspnetcore
         image: dotvvmci.azurecr.io/dotvvm.samples.basicsamples.aspnetcore:latest
         imagePullPolicy: Always
-        imagePullSecrets:
-        - name: azurecontainerreg
         ports:
         - containerPort: 80
+      imagePullSecrets:
+      - name: azurecontainerreg
