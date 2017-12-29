@@ -6,13 +6,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Views\Generator.dothtml" />
+    <!--Include Views-->
+    <Content Include="**/*.dothtml" Exclude="obj/**/*.*;bin/**/*.*">
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </Content>
+    <!--Include MasterPage Views-->
+    <Content Include="**/*.dotmaster" Exclude="obj/**/*.*;bin/**/*.*">
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </Content>
+    <!--Include Custom Control Views-->
+    <Content Include="**/*.dotcontrol" Exclude="obj/**/*.*;bin/**/*.*">
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
-
   <ItemGroup>
-    <Content Include="Views\Generator.dothtml" />
+    <None Remove="dotvvm_serialized_config.json.tmp" />
   </ItemGroup>
-
   <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
