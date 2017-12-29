@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Reflection;
 using DotVVM.Framework.Binding;
@@ -37,8 +38,11 @@ namespace DotVVM.Samples.BasicSamples
                 });
             // new GithubApiClient.GithubApiClient().Repos.GetIssues()
 
-            config.RegisterApiGroup(typeof(Common.Api.Owin.TestWebApiClientOwin), "http://localhost:61453/", "Scripts/TestWebApiClientOwin.js", "_api");
-            config.RegisterApiClient(typeof(Common.Api.AspNetCore.Client), "http://localhost:5001/", "Scripts/TestWebApiClientAspNetCore.js", "_api2");
+            var owinApiUrl = Environment.GetEnvironmentVariable("SAMPLES_OWIN_API_URL") ?? "http://localhost:61453/";
+            var aspnetCoreApiUrl = Environment.GetEnvironmentVariable("SAMPLES_ASPNETCORE_API_URL") ?? "http://localhost:5001/";
+
+            config.RegisterApiGroup(typeof(Common.Api.Owin.TestWebApiClientOwin), owinApiUrl, "Scripts/TestWebApiClientOwin.js", "_api");
+            config.RegisterApiClient(typeof(Common.Api.AspNetCore.Client), aspnetCoreApiUrl, "Scripts/TestWebApiClientAspNetCore.js", "_api2");
 
             config.RegisterApiGroup(typeof(GithubApiClient.GithubApiClient), "https://api.github.com/", "Scripts/GithubApiClient.js", "_github", customFetchFunction: "basicAuthenticatedFetch");
             config.RegisterApiClient(typeof(AzureFunctionsApi.Client), "https://dotvvmazurefunctionstest.azurewebsites.net/", "Scripts/AzureFunctionsApiClient.js", "_azureFuncApi");
