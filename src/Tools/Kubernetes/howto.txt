@@ -1,0 +1,19 @@
+# Install Azure CLI locally
+
+choco install azure-cli -y
+
+
+# Create cluster (already done)
+
+az aks create --resource-group DotvvmKubernetes --name dotvvmci --node-count 1 --node-vm-size Standard_B1ms --node-osdisk-size 32 --generate-ssh-keys --location westeurope
+
+# Get Kubernetes configuration with tokens for registering in VSTS (already done)
+
+az aks kubernetes get-credentials --name dotvvmci --resource-group DotvvmKubernetes --file -
+
+
+# Login in the Kubernetes portal 
+
+az login
+az account set --subscription "Subscription 10"
+az aks browse --resource-group DotvvmKubernetes --name dotvvmci
