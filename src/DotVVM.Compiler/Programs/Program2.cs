@@ -9,6 +9,7 @@ using System.Threading;
 using DotVVM.Compiler.Compilation;
 using DotVVM.Compiler.DTOs;
 using DotVVM.Compiler.Initialization;
+using DotVVM.Compiler.Output;
 using DotVVM.Compiler.Resolving;
 using Newtonsoft.Json;
 
@@ -16,7 +17,7 @@ namespace DotVVM.Compiler.Programs
 {
     public class Program2
     {
-
+        public static IOutputLogger Logger { get; private set; }
 
         internal static CompilerOptions Options { get; private set; }
         internal static HashSet<string> assemblySearchPaths { get; private set; } = new HashSet<string>();
@@ -27,6 +28,8 @@ namespace DotVVM.Compiler.Programs
         }
         public static void ContinueMain(string[] args)
         {
+            Logger = new AggregatedOutputLogger(new ConsoleOutputLogger(stopwatcher));
+
             WriteTargetFramework();
 
             GetEnvironmentAssemblySearchPaths();
@@ -59,6 +62,12 @@ namespace DotVVM.Compiler.Programs
                 WaitForDbg(true);
                 args = args.Skip(1).ToArray();
             }
+            if (args[0] == "--logfile")
+            {
+                var filePath = args[1];
+                Logger = new AggregatedOutputLogger(new ConsoleOutputLogger(stopwatcher), new FileOutputLogger(filePath, stopwatcher));
+                args = args.Skip(2).ToArray();
+            }
 
             if (args[0] == "--json")
             {
@@ -84,9 +93,9 @@ namespace DotVVM.Compiler.Programs
         private static void WriteTargetFramework()
         {
 #if NET461
-            WriteInfo("Target framework: .NET Framework 4.6");
+            Logger.WriteInfo("Target framework: .NET Framework 4.6");
 #elif NETCOREAPP2_0
-            WriteInfo("Target framework: .NET Standard 2.0");
+            Logger.WriteInfo("Target framework: .NET Standard 2.0");
 #endif
         }
 
@@ -135,7 +144,7 @@ JSON structure:
 
         private static void WaitForDbg(bool _break = false)
         {
-            WriteInfo("Process ID: " + Process.GetCurrentProcess().Id);
+            Logger.WriteInfo("Process ID: " + Process.GetCurrentProcess().Id);
             while (!Debugger.IsAttached) Thread.Sleep(10);
             if (_break)
             {
@@ -172,19 +181,19 @@ JSON structure:
                 if (options.FullCompile)
                 {
                     // compile views
-                    WriteInfo("Starting full compilation...");
+                    Logger.WriteInfo("Starting full compilation...");
                     result = Compile(options);
                 }
                 else if (options.CheckBindingErrors)
                 {
                     // check errors views
-                    WriteInfo("Starting error validation...");
+                    Logger.WriteInfo("Starting error validation...");
                     result = Compile(options);
                 }
                 else
                 {
                     // only export configuration
-                    WriteInfo("Starting export configuration only ...");
+                    Logger.WriteInfo("Starting export configuration only ...");
                     result = ExportConfiguration(options);
                 }
 
@@ -194,7 +203,7 @@ JSON structure:
                     new JsonSerializerSettings {
                         TypeNameHandling = TypeNameHandling.Auto,
                     });
-                Console.WriteLine(serializedResult);
+                Logger.WriteResult(serializedResult);
                 WriteConfigurationOutput(serializedResult);
 
                 Console.WriteLine();
@@ -202,7 +211,7 @@ JSON structure:
             }
             catch (Exception ex)
             {
-                WriteError(ex);
+                Logger.WriteError(ex);
                 return false;
             }
         }
@@ -216,7 +225,7 @@ JSON structure:
             {
                 file.Directory.Create();
             }
-            WriteInfo($"Saving configuration to '{file.FullName}'");
+            Logger.WriteInfo($"Saving configuration to '{file.FullName}'");
             File.WriteAllText(file.FullName, serializedResult);
         }
 
@@ -251,31 +260,18 @@ JSON structure:
                     assemblySearchPaths.Add(Path.GetDirectoryName(options.WebSiteAssembly));
                 }
 
-                WriteInfo("Using the following assembly search paths: ");
+                Logger.WriteInfo("Using the following assembly search paths: ");
                 foreach (var path in assemblySearchPaths)
                 {
-                    WriteInfo(path);
+                    Logger.WriteInfo(path);
                 }
             }
             catch (Exception ex)
             {
-                WriteError(ex);
+                Logger.WriteError(ex);
             }
 
             return options;
-        }
-
-        private static void WriteError(Exception ex)
-        {
-            WriteInfo("Error occured!");
-            var exceptionJson = JsonConvert.SerializeObject(ex);
-            Console.WriteLine("!" + exceptionJson);
-            Console.WriteLine();
-        }
-
-        public static void WriteInfo(string line)
-        {
-            Console.WriteLine("#" + stopwatcher?.Elapsed + ": " + line);
         }
 
         private static string ReadFromStdin()

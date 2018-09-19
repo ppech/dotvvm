@@ -111,7 +111,7 @@ namespace DotVVM.Compiler.Compilation
                 bindingCompiler.AddSerializedObjects(ObjectsClassName, builder, fields);
                 bindingCompiler.SaveAssembly();
 
-                Program2.WriteInfo($"Bindings saved to {bindingsAssemblyPath}.");
+                Program2.Logger.WriteInfo($"Bindings saved to {bindingsAssemblyPath}.");
 
                 compilation = compilation.AddReferences(MetadataReference.CreateFromFile(Path.GetFullPath(bindingsAssemblyPath)));
                 var compiledViewsFileName = Path.Combine(Options.OutputPath, Options.AssemblyName + "_Views" + ".dll");
@@ -131,16 +131,16 @@ namespace DotVVM.Compiler.Compilation
                 //File.Delete(compiledViewsFileName);
                 //File.Delete(bindingsAssemblyPath);
 
-                Program2.WriteInfo($"Compiled views saved to {compiledViewsFileName}.");
+                Program2.Logger.WriteInfo($"Compiled views saved to {compiledViewsFileName}.");
             }
         }
 
         public CompilationResult Execute()
         {
-            Program2.WriteInfo("Initializing...");
+            Program2.Logger.WriteInfo("Initializing...");
             Init();
 
-            Program2.WriteInfo("Compiling views...");
+            Program2.Logger.WriteInfo("Compiling views...");
             foreach (var file in Options.DothtmlFiles)
             {
                 try
@@ -157,11 +157,11 @@ namespace DotVVM.Compiler.Compilation
 
             if (Options.FullCompile)
             {
-                Program2.WriteInfo("Emitting assemblies...");
+                Program2.Logger.WriteInfo("Emitting assemblies...");
                 Save();
             }
 
-            Program2.WriteInfo("Building compilation results...");
+            Program2.Logger.WriteInfo("Building compilation results...");
             return result;
         }
 
@@ -243,7 +243,7 @@ namespace DotVVM.Compiler.Compilation
                         .Select(a => CompiledAssemblyCache.Instance.GetAssemblyMetadata(a.Key)));
             }
 
-            Program2.WriteInfo($"The view { fileName } compiled successfully.");
+            Program2.Logger.WriteInfo($"The view { fileName } compiled successfully.");
 
             var res = new ViewCompilationResult {
                 BuilderClassName = fullClassName,

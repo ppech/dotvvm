@@ -27,10 +27,10 @@ namespace DotVVM.Compiler.Resolving
 
             try
             {
-                Program2.WriteInfo($"Resolving assembly `{args.Name}`.");
+                Program2.Logger.WriteInfo($"Resolving assembly `{args.Name}`.");
                 var r = LoadFromAlternativeFolder(args.Name);
                 if (r != null) return r;
-                Program2.WriteInfo($"Assembly `{args.Name}` resolve failed.");
+                Program2.Logger.WriteInfo($"Assembly `{args.Name}` resolve failed.");
 
                 //We cannot do typeof(something).Assembly, because besides the compiler there are no dlls, doing that will try to load the dll from the disk
                 //which fails, so this event is called again call this event...
@@ -56,14 +56,14 @@ namespace DotVVM.Compiler.Resolving
         {
             foreach (var path in Program2.assemblySearchPaths)
             {
-                Program2.WriteInfo($"Searching in {path}");
+                Program2.Logger.WriteInfo($"Searching in {path}");
                 var assemblyPath = Path.Combine(path, new AssemblyName(name).Name);
 
                 if (File.Exists(assemblyPath + ".dll"))
                 {
                     {
                         loadAssemblyFromFile = LoadAssemblyFromFile(assemblyPath + ".dll");
-                        Program2.WriteInfo($"Assembly found at {assemblyPath + ".dll"}");
+                        Program2.Logger.WriteInfo($"Assembly found at {assemblyPath + ".dll"}");
 
                         return true;
                     }
@@ -73,7 +73,7 @@ namespace DotVVM.Compiler.Resolving
                 {
                     {
                         loadAssemblyFromFile = LoadAssemblyFromFile(assemblyPath + ".exe");
-                        Program2.WriteInfo($"Assembly found at {assemblyPath + ".exe"}");
+                        Program2.Logger.WriteInfo($"Assembly found at {assemblyPath + ".exe"}");
                         return true;
                     }
                 }
