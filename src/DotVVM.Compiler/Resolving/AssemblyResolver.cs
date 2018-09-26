@@ -57,25 +57,33 @@ namespace DotVVM.Compiler.Resolving
             foreach (var path in Program2.assemblySearchPaths)
             {
                 Program2.Logger.WriteInfo($"Searching in {path}");
-                var assemblyPath = Path.Combine(path, new AssemblyName(name).Name);
+                var assemblyPathWithoutExtension = Path.Combine(path, new AssemblyName(name).Name);
 
-                if (File.Exists(assemblyPath + ".dll"))
+                if (TryLoadAssemblyFromFile(assemblyPathWithoutExtension + ".dll", out loadAssemblyFromFile)) return true;
+
+                if (TryLoadAssemblyFromFile(assemblyPathWithoutExtension + ".exe", out loadAssemblyFromFile)) return true;
+            }
+
+            loadAssemblyFromFile = null;
+            return false;
+        }
+
+        private static bool TryLoadAssemblyFromFile(string assemblyPath, out Assembly loadAssemblyFromFile)
+        {
+            if (File.Exists(assemblyPath))
+            {
                 {
+                    try
                     {
-                        loadAssemblyFromFile = LoadAssemblyFromFile(assemblyPath + ".dll");
-                        Program2.Logger.WriteInfo($"Assembly found at {assemblyPath + ".dll"}");
-
-                        return true;
+                        loadAssemblyFromFile = LoadAssemblyFromFile(assemblyPath);
                     }
-                }
-
-                if (File.Exists(assemblyPath + ".exe"))
-                {
+                    catch (Exception)
                     {
-                        loadAssemblyFromFile = LoadAssemblyFromFile(assemblyPath + ".exe");
-                        Program2.Logger.WriteInfo($"Assembly found at {assemblyPath + ".exe"}");
-                        return true;
+                        loadAssemblyFromFile = null;
+                        return false;
                     }
+                    Program2.Logger.WriteInfo($"Assembly found at {assemblyPath}");
+                    return true;
                 }
             }
 
@@ -85,7 +93,7 @@ namespace DotVVM.Compiler.Resolving
 
         private static Assembly LoadAssemblyFromFile(string assemblyPath)
         {
-            return AssemblyLoader.LoadFile(assemblyPath);
+            return AssemblyLoader.LoadFile(assemblyPath) ?? throw new NullReferenceException();
         }
 
       

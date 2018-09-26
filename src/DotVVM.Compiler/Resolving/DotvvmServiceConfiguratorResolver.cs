@@ -18,7 +18,7 @@ namespace DotVVM.Compiler.Resolving
             if (resultTypes.Count > 1)
             {
                 throw new ConfigurationInitializationException(
-                    $"Assembly '{assembly.FullName}' contains more the one implementaion of IDotvvmServiceConfigurator.");
+                    $"Assembly '{assembly.FullName}' contains more the one implementation of IDotvvmServiceConfigurator.");
             }
 
             return resultTypes.SingleOrDefault();

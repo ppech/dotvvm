@@ -136,9 +136,14 @@ JSON structure:
         {
             foreach (var path in Environment.GetEnvironmentVariable("assemblySearchPath")?.Split(',') ?? new string[0])
             {
+                Logger.WriteInfo($"Adding path from environment variable: {path}");
                 assemblySearchPaths.Add(path);
             }
+            Logger.WriteInfo($"Adding path from current working directory: {Environment.CurrentDirectory}");
             assemblySearchPaths.Add(Environment.CurrentDirectory);
+            //Env current directory may not be directory where compiler.exe or .dll is located
+            Logger.WriteInfo($"Adding path from compiler assembly startup path: {AppDomain.CurrentDomain.BaseDirectory}");
+            assemblySearchPaths.Add(AppDomain.CurrentDomain.BaseDirectory);
         }
        
 
