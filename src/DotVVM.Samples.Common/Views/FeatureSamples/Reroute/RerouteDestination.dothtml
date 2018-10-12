@@ -1,0 +1,11 @@
+﻿@viewModel System.Object
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reroute Test Destination</title>
+</head>
+<body>
+    <h1>You've been Rerouted!</h1>
+</body>
+</html>

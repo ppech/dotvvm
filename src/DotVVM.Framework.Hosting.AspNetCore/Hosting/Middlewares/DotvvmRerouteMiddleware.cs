@@ -31,7 +31,7 @@ namespace DotVVM.Framework.Hosting.Middlewares
                 {
                     var configuration = context.RequestServices.GetRequiredService<DotvvmConfiguration>();
                     var route = configuration.RouteTable[exception.RouteName];
-                    var url = route.BuildUrl(exception.RouteValues);
+                    var url = route.BuildUrl(exception.RouteValues).TrimStart(new[] { '~' });
                     context.Request.Path = new PathString(url);
                 }
             }

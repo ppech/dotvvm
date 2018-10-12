@@ -24,9 +24,9 @@ namespace DotVVM.Framework.Hosting.Middlewares
                 }
                 catch (DotvvmRerouteException exception)
                 {
-                    var configuration = context.GetDotvvmContext().Configuration;
-                    var route = configuration.RouteTable[exception.RouteName];
-                    var url = route.BuildUrl(exception.RouteValues);
+                    var dotvvmContext = context.GetDotvvmContext();
+                    var route = dotvvmContext.Configuration.RouteTable[exception.RouteName];
+                    var url = route.BuildUrl(exception.RouteValues).Trim(new[] { '~' });
                     context.Request.Path = new PathString(url);
                 }
             }

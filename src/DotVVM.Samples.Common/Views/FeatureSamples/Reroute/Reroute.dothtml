@@ -1,0 +1,16 @@
+﻿@viewModel DotVVM.Samples.Common.ViewModels.FeatureSamples.Reroute.RerouteViewModel, DotVVM.Samples.Common
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>A RerouteMiddleware Test</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Reroute test</h1>
+        <dot:Button Text="Test Reroute" Click="{command: Reroute()}" />
+    </div>
+</body>
+</html>
+
+
