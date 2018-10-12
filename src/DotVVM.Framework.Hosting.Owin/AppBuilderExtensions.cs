@@ -75,6 +75,7 @@ namespace Owin
                 app.Use<DotvvmErrorPageMiddleware>();
             }
 
+            app.Use<DotvvmRerouteMiddleware>();
             app.Use<DotvvmMiddleware>(config, new List<IMiddleware> {
                 ActivatorUtilities.CreateInstance<DotvvmLocalResourceMiddleware>(config.ServiceProvider),
                 DotvvmFileUploadMiddleware.TryCreate(config.ServiceProvider),

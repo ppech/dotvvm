@@ -63,6 +63,7 @@ namespace Microsoft.AspNetCore.Builder
                 app.UseMiddleware<DotvvmErrorPageMiddleware>();
             }
 
+            app.UseMiddleware<DotvvmRerouteMiddleware>();
             app.UseMiddleware<DotvvmMiddleware>(config, new List<IMiddleware>
             {
                 ActivatorUtilities.CreateInstance<DotvvmLocalResourceMiddleware>(app.ApplicationServices),
